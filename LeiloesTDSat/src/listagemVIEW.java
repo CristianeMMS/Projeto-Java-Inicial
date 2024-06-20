@@ -35,7 +35,7 @@ public class listagemVIEW extends javax.swing.JFrame {
         btnConsultaVendas = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         listaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -145,12 +145,14 @@ public class listagemVIEW extends javax.swing.JFrame {
     private void btnConsultaVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaVendasActionPerformed
         vendasVIEW vendas = new vendasVIEW();
         vendas.setVisible(true);
+        dispose();
         
     }//GEN-LAST:event_btnConsultaVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         cadastroVIEW cadastro = new cadastroVIEW();
         cadastro.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**

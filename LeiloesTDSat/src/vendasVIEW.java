@@ -1,3 +1,8 @@
+
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -14,6 +19,8 @@ public class vendasVIEW extends javax.swing.JFrame {
      */
     public vendasVIEW() {
         initComponents();
+        listarProdutosVendidos();
+        
     }
 
     /**
@@ -51,6 +58,11 @@ public class vendasVIEW extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblProdutosVendidos);
 
         btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -96,6 +108,34 @@ public class vendasVIEW extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        listagemVIEW listagem = new listagemVIEW();
+        listagem.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void listarProdutosVendidos() {
+        try {
+            ProdutosDAO produtosDAO = new ProdutosDAO();
+            DefaultTableModel model = (DefaultTableModel) tblProdutosVendidos.getModel();
+            model.setNumRows(0);
+            ArrayList<ProdutosDTO> listagem = produtosDAO.listarProdutosVendidos();
+
+            for (ProdutosDTO produto : listagem) {
+                model.addRow(new Object[]{
+                    produto.getId(),
+                    produto.getNome(),
+                    produto.getValor(),
+                    produto.getStatus()
+                });
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao listar produtos vendidos: " + e.getMessage());
+        }
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */
